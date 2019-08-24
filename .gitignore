@@ -73,4 +73,6 @@ Thumbs.db
 
 /rabarbar
 /moc_*
-/out.png
+/out.*
+/screenshot.*
+
