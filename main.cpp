@@ -1,13 +1,14 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QDebug>
 #include "common.h"
 #include "options.h"
+#include "browser.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
-    QCoreApplication::setApplicationName(APP_NAME);
-    QCoreApplication::setApplicationVersion(APP_VERSION);
+    QApplication app(argc, argv);
+    QApplication::setApplicationName(APP_NAME);
+    QApplication::setApplicationVersion(APP_VERSION);
 
     qDebug() << APP_NAME << APP_VERSION << " - " << APP_DESCRIPTION;
 
@@ -22,6 +23,9 @@ int main(int argc, char *argv[])
         qDebug() << "Invalid or missing arguments";
         return -1;
     }
+
+    Browser browser(options);
+    browser.run();
 
     return app.exec();
 }
