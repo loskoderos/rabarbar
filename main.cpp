@@ -4,6 +4,12 @@
 #include "options.h"
 #include "browser.h"
 
+void safeExit()
+{
+    qDebug() << "Exit";
+    QApplication::exit();
+}
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -26,7 +32,8 @@ int main(int argc, char *argv[])
     }
 
     Browser browser(options);
-    browser.run();
+    QObject::connect(&browser, &Browser::screenshotFinished, safeExit);
 
+    browser.run();
     return app.exec();
 }

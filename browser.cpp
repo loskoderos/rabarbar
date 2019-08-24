@@ -49,4 +49,6 @@ void Browser::screenshot()
     _view->render(_painter);
     _painter->end();
     _image->save(_options.out);
+
+    emit screenshotFinished();
 }

@@ -19,6 +19,9 @@ public slots:
     void loadFinished();
     void delayedShot();
 
+signals:
+    void screenshotFinished();
+
 private:
     void screenshot();
 
