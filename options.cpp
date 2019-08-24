@@ -14,6 +14,11 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "url"
                           },
                           {
+                              "out",
+                              "Output filename.",
+                              "out"
+                          },
+                          {
                               "width",
                               "Screnshot width.",
                               "width"
@@ -38,6 +43,12 @@ bool parseOptions(const QStringList &strings, Options &options)
         result = false;
     }
 
+    if (parser.isSet("out")) {
+        options.out = parser.value("out");
+    } else {
+        result = false;
+    }
+
     if (parser.isSet("width")) {
         options.width = parser.value("width").toInt();
     } else {
@@ -52,8 +63,6 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("delay")) {
         options.delay = parser.value("delay").toInt();
-    } else {
-        result = false;
     }
 
     return result;

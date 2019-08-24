@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     Options options;
     bool parserResult = parseOptions(QCoreApplication::arguments(), options);
     qDebug() << " url =" << options.url;
+    qDebug() << " out =" << options.out;
     qDebug() << " width =" << options.width;
     qDebug() << " height =" << options.height;
     qDebug() << " delay =" << options.delay;

@@ -15,7 +15,13 @@ public:
     Browser(const Options& options);
     void run();
 
+public slots:
+    void loadFinished();
+    void delayedShot();
+
 private:
+    void screenshot();
+
     const Options _options;
     QImage *_image;
     QPainter *_painter;

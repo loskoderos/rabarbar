@@ -72,4 +72,5 @@ Thumbs.db
 *.exe
 
 /rabarbar
-moc_*
+/moc_*
+/out.png
