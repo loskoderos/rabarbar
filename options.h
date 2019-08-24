@@ -1,20 +1,20 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <QString>
-#include <QCommandLineParser>
+#include <QUrl>
+#include <QStringList>
 
 struct Options
 {
-    QString url;
+    QUrl url;
+    int width;
+    int height;
+    int delay;
+
+public:
+    Options(): url(""), width(0), height(0), delay(0) {}
 };
 
-enum OptionsParserResult
-{
-    OptionsOk,
-    OptionsError
-};
-
-OptionsParserResult parseOptions(QCommandLineParser &parser, Options &options);
+bool parseOptions(const QStringList &strings, Options &options);
 
 #endif // OPTIONS_H

@@ -10,10 +10,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(APP_VERSION);
 
     Options options;
-    QCommandLineParser parser;
 
-    parseOptions(parser, options);
-    qDebug() << options.url;
+    parseOptions(QCoreApplication::arguments(), options);
+    qDebug() << "url =" << options.url;
+    qDebug() << "width =" << options.width;
+    qDebug() << "height =" << options.height;
+    qDebug() << "delay =" << options.delay;
 
     return app.exec();
 }
