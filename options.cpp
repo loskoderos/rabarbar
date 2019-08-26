@@ -32,6 +32,11 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "delay",
                               "Wait for n seconds for website after its fully loaded.",
                               "delay"
+                          },
+                          {
+                              "user-agent",
+                              "Custom browser user agent.",
+                              "user-agent"
                           }
                       });
 
@@ -63,6 +68,10 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("delay")) {
         options.delay = parser.value("delay").toInt();
+    }
+
+    if (parser.isSet("user-agent")) {
+        options.userAgent = parser.value("user-agent");
     }
 
     return result;

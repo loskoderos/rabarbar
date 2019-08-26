@@ -2,17 +2,20 @@
 #include <QFile>
 #include <QSize>
 #include <QTimer>
+#include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include "browser.h"
 
 Browser::Browser(const Options& options): QObject (), _options(options)
 {
-
     QWebEngineSettings::defaultSettings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
+
+    if (_options.userAgent.length() > 0) {
+        QWebEngineProfile::defaultProfile()->setHttpUserAgent(_options.userAgent);
+    }
 
     _view = new QWebEngineView;
     _view->resize(QSize(_options.width, _options.height));
-
     connect(_view, &QWebEngineView::loadFinished, this, &Browser::loadFinished);
 }
 

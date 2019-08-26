@@ -12,9 +12,17 @@ struct Options
     int width;
     int height;
     int delay;
+    QString userAgent;
 
 public:
-    Options(): url(""), out(""), width(0), height(0), delay(0) {}
+    Options():
+        url(""),
+        out(""),
+        width(0),
+        height(0),
+        delay(0),
+        userAgent("")
+    {}
 };
 
 bool parseOptions(const QStringList &strings, Options &options);
