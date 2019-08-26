@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         browser.cpp \
+        interceptor.cpp \
         main.cpp \
         options.cpp
 
@@ -28,4 +29,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     browser.h \
     common.h \
+    interceptor.h \
     options.h

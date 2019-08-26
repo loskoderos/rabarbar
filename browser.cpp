@@ -5,11 +5,13 @@
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include "browser.h"
+#include "interceptor.h"
 
 Browser::Browser(const Options& options): QObject (), _options(options)
 {
     QWebEngineSettings::defaultSettings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
 
+    QWebEngineProfile::defaultProfile()->setRequestInterceptor(new RequestInterceptor());
     if (_options.userAgent.length() > 0) {
         QWebEngineProfile::defaultProfile()->setHttpUserAgent(_options.userAgent);
     }
