@@ -1,3 +1,4 @@
+#include <QByteArray>
 #include <QCommandLineParser>
 #include "options.h"
 
@@ -12,6 +13,11 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "url",
                               "Website URL address.",
                               "url"
+                          },
+                          {
+                              "b64-url",
+                              "Website URL address (Base64 encoded).",
+                              "b64-url"
                           },
                           {
                               "out",
@@ -49,6 +55,8 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("url")) {
         options.url = QUrl::fromUserInput(parser.value("url"));
+    } else if (parser.isSet("b64-url")) {
+        options.url = QUrl::fromUserInput(QByteArray::fromBase64(parser.value("b64-url").toUtf8()).data());
     } else {
         result = false;
     }
