@@ -13,6 +13,7 @@ struct Options
     int height;
     int delay;
     QString userAgent;
+    QString referer;
 
 public:
     Options():
@@ -20,8 +21,9 @@ public:
         out(""),
         width(0),
         height(0),
-        delay(0),
-        userAgent("")
+        delay(1),   // This might be fixed in future.
+        userAgent(""),
+        referer("")
     {}
 };
 

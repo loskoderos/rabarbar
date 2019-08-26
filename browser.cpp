@@ -11,7 +11,7 @@ Browser::Browser(const Options& options): QObject (), _options(options)
 {
     QWebEngineSettings::defaultSettings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
 
-    QWebEngineProfile::defaultProfile()->setRequestInterceptor(new RequestInterceptor());
+    QWebEngineProfile::defaultProfile()->setRequestInterceptor(new RequestInterceptor(options));
     if (_options.userAgent.length() > 0) {
         QWebEngineProfile::defaultProfile()->setHttpUserAgent(_options.userAgent);
     }

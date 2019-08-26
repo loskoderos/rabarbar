@@ -37,6 +37,11 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "user-agent",
                               "Custom browser user agent.",
                               "user-agent"
+                          },
+                          {
+                              "referer",
+                              "Custom referer header.",
+                              "referer"
                           }
                       });
 
@@ -72,6 +77,10 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("user-agent")) {
         options.userAgent = parser.value("user-agent");
+    }
+
+    if (parser.isSet("referer")) {
+        options.referer = parser.value("referer");
     }
 
     return result;
