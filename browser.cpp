@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QFile>
 #include <QSize>
 #include <QTimer>
 #include <QWebEngineSettings>
@@ -43,12 +44,25 @@ void Browser::delayedShot()
     screenshot();
 }
 
+void Browser::pdfPrintingFinished()
+{
+    qDebug() << "PDF printing finished";
+    emit screenshotFinished();
+}
+
 void Browser::screenshot()
 {
-    qDebug() << "Screenshot";
-    _view->render(_painter);
-    _painter->end();
-    _image->save(_options.out);
+    qDebug() << "Save screenshot to" << _options.out;
 
-    emit screenshotFinished();
+    if (_options.out.endsWith(".pdf", Qt::CaseInsensitive)) {
+        connect(_view->page(), &QWebEnginePage::pdfPrintingFinished, this, &Browser::pdfPrintingFinished);
+        _view->page()->printToPdf(_options.out);
+
+    } else {
+        _view->render(_painter);
+        _painter->end();
+        _image->save(_options.out);
+
+        emit screenshotFinished();
+    }
 }

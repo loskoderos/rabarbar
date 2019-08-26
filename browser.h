@@ -18,6 +18,7 @@ public:
 public slots:
     void loadFinished();
     void delayedShot();
+    void pdfPrintingFinished();
 
 signals:
     void screenshotFinished();
