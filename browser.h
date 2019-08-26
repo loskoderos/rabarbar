@@ -27,8 +27,6 @@ private:
     void screenshot();
 
     const Options _options;
-    QImage *_image;
-    QPainter *_painter;
     QWebEngineView *_view;
 };
 

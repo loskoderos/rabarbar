@@ -7,14 +7,11 @@
 
 Browser::Browser(const Options& options): QObject (), _options(options)
 {
-    QSize size(_options.width, _options.height);
-    _image = new QImage(size, QImage::Format_RGB32);
-    _painter = new QPainter(_image);
 
     QWebEngineSettings::defaultSettings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
 
     _view = new QWebEngineView;
-    _view->resize(size);
+    _view->resize(QSize(_options.width, _options.height));
 
     connect(_view, &QWebEngineView::loadFinished, this, &Browser::loadFinished);
 }
@@ -59,9 +56,13 @@ void Browser::screenshot()
         _view->page()->printToPdf(_options.out);
 
     } else {
-        _view->render(_painter);
-        _painter->end();
-        _image->save(_options.out);
+        QSize size(_options.width, _options.height);
+        QImage *image = new QImage(size, QImage::Format_RGB32);
+        QPainter *painter = new QPainter(image);
+
+        _view->render(painter);
+        painter->end();
+        image->save(_options.out);
 
         emit screenshotFinished();
     }
