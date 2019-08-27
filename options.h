@@ -14,6 +14,8 @@ struct Options
     int delay;
     QString userAgent;
     QString referer;
+    QString pdfOrientation; // landscape, portrait...
+    QString pdfPaperSize;   // a3, a4, letter, tabloid...
 
 public:
     Options():
@@ -23,7 +25,9 @@ public:
         height(0),
         delay(1),   // This might be fixed in future.
         userAgent(""),
-        referer("")
+        referer(""),
+        pdfOrientation("portrait"),
+        pdfPaperSize("a4")
     {}
 };
 

@@ -1,5 +1,8 @@
 #include <QDebug>
 #include <QFile>
+#include <QMargins>
+#include <QPageLayout>
+#include <QPageSize>
 #include <QSize>
 #include <QTimer>
 #include <QWebEngineProfile>
@@ -57,8 +60,23 @@ void Browser::screenshot()
     qDebug() << "Save screenshot to" << _options.out;
 
     if (_options.out.endsWith(".pdf", Qt::CaseInsensitive)) {
+        QPageSize pageSize(QPageSize::A4);
+        if (_options.pdfPaperSize == "a3") {
+            pageSize = QPageSize(QPageSize::A3);
+        } else if (_options.pdfPaperSize == "a4") {
+            pageSize = QPageSize(QPageSize::A4);
+        } else if (_options.pdfPaperSize == "letter") {
+            pageSize = QPageSize(QPageSize::Letter);
+        } else if (_options.pdfPaperSize == "tabloid") {
+            pageSize = QPageSize(QPageSize::Tabloid);
+        }
+        QPageLayout layout(pageSize,
+                           _options.pdfOrientation == "landscape"
+                           ? QPageLayout::Landscape : QPageLayout::Portrait,
+                           QMarginsF());
+
         connect(_view->page(), &QWebEnginePage::pdfPrintingFinished, this, &Browser::pdfPrintingFinished);
-        _view->page()->printToPdf(_options.out);
+        _view->page()->printToPdf(_options.out, layout);
 
     } else {
         QSize size(_options.width, _options.height);

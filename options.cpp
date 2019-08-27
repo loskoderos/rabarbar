@@ -48,6 +48,16 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "referer",
                               "Custom referer header.",
                               "referer"
+                          },
+                          {
+                              "pdf-orientation",
+                              "PDF orientation (landscape, portrait).",
+                              "pdf-orientation"
+                          },
+                          {
+                              "pdf-paper-size",
+                              "PDF orientation (a3, a4, letter, tabloid).",
+                              "pdf-paper-size"
                           }
                       });
 
@@ -89,6 +99,14 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("referer")) {
         options.referer = parser.value("referer");
+    }
+
+    if (parser.isSet("pdf-orientation")) {
+        options.pdfOrientation = parser.value("pdf-orientation").toLower();
+    }
+
+    if (parser.isSet("pdf-paper-size")) {
+        options.pdfPaperSize = parser.value("pdf-paper-size").toLower();
     }
 
     return result;
