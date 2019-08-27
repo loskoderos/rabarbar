@@ -8,7 +8,7 @@ RequestInterceptor::RequestInterceptor(const Options &options, QObject *p)
 
 void RequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 {
-    qDebug() << "Browser request interceptor" << info.requestUrl();
+    //qDebug() << "Browser request interceptor" << info.requestUrl();
 
     if (_options.referer.length() > 0) {
         info.setHttpHeader("Referer", _options.referer.toUtf8());

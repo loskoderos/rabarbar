@@ -5,6 +5,7 @@
 #include <QPageSize>
 #include <QSize>
 #include <QTimer>
+#include <QWebEnginePage>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include "browser.h"
@@ -12,14 +13,22 @@
 
 Browser::Browser(const Options& options): QObject (), _options(options)
 {
-    QWebEngineSettings::defaultSettings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
+    RequestInterceptor *interceptor = new RequestInterceptor(_options);
 
-    QWebEngineProfile::defaultProfile()->setRequestInterceptor(new RequestInterceptor(options));
+    QWebEngineProfile *profile = new QWebEngineProfile();
+    profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
+    profile->setPersistentCookiesPolicy(QWebEngineProfile::NoPersistentCookies);
+    profile->setPersistentStoragePath(nullptr);
+    profile->setRequestInterceptor(interceptor);
     if (_options.userAgent.length() > 0) {
-        QWebEngineProfile::defaultProfile()->setHttpUserAgent(_options.userAgent);
+        profile->setHttpUserAgent(_options.userAgent);
     }
 
+    QWebEnginePage *page = new QWebEnginePage(profile);
+    page->settings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
+
     _view = new QWebEngineView;
+    _view->setPage(page);
     _view->resize(QSize(_options.width, _options.height));
     connect(_view, &QWebEngineView::loadFinished, this, &Browser::loadFinished);
 }
