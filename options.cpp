@@ -40,6 +40,11 @@ bool parseOptions(const QStringList &strings, Options &options)
                               "delay"
                           },
                           {
+                              "timeout",
+                              "Max wait time for a page to be loaded.",
+                              "timeout"
+                          },
+                          {
                               "user-agent",
                               "Custom browser user agent.",
                               "user-agent"
@@ -91,6 +96,10 @@ bool parseOptions(const QStringList &strings, Options &options)
 
     if (parser.isSet("delay")) {
         options.delay = parser.value("delay").toInt();
+    }
+
+    if (parser.isSet("timeout")) {
+        options.timeout = parser.value("timeout").toInt();
     }
 
     if (parser.isSet("user-agent")) {

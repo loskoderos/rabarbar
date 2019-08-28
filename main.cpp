@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     qDebug() << " width =" << options.width;
     qDebug() << " height =" << options.height;
     qDebug() << " delay =" << options.delay;
+    qDebug() << " timeout =" << options.timeout;
 
     if (!parserResult) {
         qDebug() << "Invalid or missing arguments";

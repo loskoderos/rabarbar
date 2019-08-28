@@ -12,6 +12,7 @@ struct Options
     int width;
     int height;
     int delay;
+    int timeout;
     QString userAgent;
     QString referer;
     QString pdfOrientation; // landscape, portrait...
@@ -24,6 +25,7 @@ public:
         width(0),
         height(0),
         delay(1),   // This might be fixed in future.
+        timeout(30),
         userAgent(""),
         referer(""),
         pdfOrientation("portrait"),

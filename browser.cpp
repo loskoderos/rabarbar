@@ -49,6 +49,8 @@ void Browser::run()
 
     // TODO: Investigate whether showing GUI can be avoided?
     _view->show();
+
+    QTimer::singleShot(_options.timeout * 1000, this, SLOT(timeout()));
 }
 
 void Browser::loadFinished()
@@ -71,6 +73,12 @@ void Browser::pdfPrintingFinished()
 {
     qDebug() << "PDF printing finished";
     emit screenshotFinished();
+}
+
+void Browser::timeout()
+{
+    qDebug() << "Timeout";
+    screenshot();
 }
 
 void Browser::screenshot()

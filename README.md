@@ -17,6 +17,7 @@ out             | yes      | Output filename.
 width           | yes      | Screenshot width in pixels.
 height          | yes      | Screenshot height in pixels.
 delay           | no       | Number of seconds to wait before grabbing a shot once the website is fully loaded.
+timeout         | no       | Max wait time for a page to be loaded in seconds.
 user-agent      | no       | Custom browser user agent.
 referer         | no       | Custom referer.
 pdf-orientation | no       | PDF orientation (portrait, landscape).
