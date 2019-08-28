@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QThread>
 #include <QDebug>
 #include "common.h"
 #include "options.h"
@@ -7,6 +8,7 @@
 void safeExit()
 {
     qDebug() << "Exit";
+    QThread::sleep(1);
     QApplication::exit();
 }
 
