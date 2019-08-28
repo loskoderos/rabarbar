@@ -5,8 +5,6 @@
 #include <QPageSize>
 #include <QSize>
 #include <QTimer>
-#include <QWebEnginePage>
-#include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include "browser.h"
 #include "interceptor.h"
@@ -15,22 +13,33 @@ Browser::Browser(const Options& options): QObject (), _options(options)
 {
     RequestInterceptor *interceptor = new RequestInterceptor(_options);
 
-    QWebEngineProfile *profile = new QWebEngineProfile();
-    profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
-    profile->setPersistentCookiesPolicy(QWebEngineProfile::NoPersistentCookies);
-    profile->setPersistentStoragePath(nullptr);
-    profile->setRequestInterceptor(interceptor);
+    _profile = new QWebEngineProfile();
+    _profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
+    _profile->setPersistentCookiesPolicy(QWebEngineProfile::NoPersistentCookies);
+    _profile->setPersistentStoragePath(nullptr);
+    _profile->setRequestInterceptor(interceptor);
     if (_options.userAgent.length() > 0) {
-        profile->setHttpUserAgent(_options.userAgent);
+        _profile->setHttpUserAgent(_options.userAgent);
     }
 
-    QWebEnginePage *page = new QWebEnginePage(profile);
-    page->settings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
+    _page = new QWebEnginePage(_profile);
+    _page->settings()->setAttribute(QWebEngineSettings::ShowScrollBars, false);
+    _page->settings()->setAttribute(QWebEngineSettings::AllowRunningInsecureContent, true);
 
     _view = new QWebEngineView;
-    _view->setPage(page);
+    _view->setPage(_page);
     _view->resize(QSize(_options.width, _options.height));
     connect(_view, &QWebEngineView::loadFinished, this, &Browser::loadFinished);
+
+    //qDebug() << "StoragePath:" << _profile->persistentStoragePath();
+    //qDebug() << "isOffTheRecord:" << _profile->isOffTheRecord();
+}
+
+Browser::~Browser()
+{
+    delete _profile;
+    delete _page;
+    delete _view;
 }
 
 void Browser::run()

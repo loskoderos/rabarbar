@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QImage>
 #include <QPainter>
+#include <QWebEnginePage>
+#include <QWebEngineProfile>
 #include <QWebEngineView>
 #include "options.h"
 
@@ -13,6 +15,7 @@ class Browser : public QObject
 
 public:
     Browser(const Options& options);
+    ~Browser();
     void run();
 
 public slots:
@@ -28,6 +31,8 @@ private:
 
     const Options _options;
     QWebEngineView *_view;
+    QWebEnginePage *_page;
+    QWebEngineProfile *_profile;
 };
 
 #endif // BROWSER_H
