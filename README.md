@@ -4,8 +4,11 @@
 
 Rabarbar is a simple website screenshot utility based on Qt Web Engine (Chromium).
 
+![sample.png](https://github.com/cepa/rabarbar/raw/master/sample.png)
+
 ## Usage
 ~~~
+./rabarbar --url https://github.com --width 640 --height 1136 --out sample.png
 ./rabarbar --url https://cepa.io --width 1280 --height 1024 --out screenshot.png
 ./rabarbar --url https://cepa.io --width 1280 --height 1024 --out screenshot.pdf --pdf-orientation=landscape --pdf-paper-size=a4
 ~~~
