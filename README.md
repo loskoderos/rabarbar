@@ -2,7 +2,7 @@
 
 *Yet another website screenshot tool*
 
-Rabarbar is a simple website screenshot utility based on Qt Web Engine (Chromium).
+Rabarbar is a simple website screenshot utility based on Qt Web Engine (Chromium), created for [Miniature.io](https://miniature.io).
 
 ![sample.png](https://github.com/cepa/rabarbar/raw/master/sample.png)
 
@@ -32,7 +32,7 @@ This app has been built and tested with Qt 5.12 running on Ubuntu 18.04 x64.
 git clone https://github.com/cepa/rabarbar
 cd rabarbar
 /opt/qt5/5.12.4/gcc_64/bin/qmake
-qmake
+make
 ./rabarbar
 ~~~
 Exact commands depend on your local Qt5 installation details.
