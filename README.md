@@ -17,8 +17,8 @@ Parameter       | Required | Description
 --------------- | -------- | -----------
 url             | yes      | Website URL address.
 out             | yes      | Output filename.
-width           | yes      | Screenshot width in pixels.
-height          | yes      | Screenshot height in pixels.
+width           | no       | Screenshot width in pixels, default 1024.
+height          | no       | Screenshot height in pixels, default 1024.
 delay           | no       | Number of seconds to wait before grabbing a shot once the website is fully loaded.
 timeout         | no       | Max wait time for a page to be loaded in seconds.
 user-agent      | no       | Custom browser user agent.
@@ -30,7 +30,7 @@ pdf-paper-size  | no       | PDF paper size (a3, a4, letter, tabloid).
 ## Prerequisites
 This app has been built and tested with Qt6 on Ubuntu 22.
 ~~~
-apt-get install qt6-base-dev qt6-webengine-dev libqt6webenginecore6-bin qmake6 xvfb
+apt-get install build-essential qt6-base-dev qt6-webengine-dev libqt6webenginecore6-bin libqt6opengl6-dev qmake6 xvfb
 ~~~
 
 ## Building
@@ -46,6 +46,16 @@ make
 Rabarbar works in headless mode with Xvfb.
 ~~~
 xvfb-run -a ./rabarbar --url https://google.com --width 1280 --height 1024 --out screenshot.png
+~~~
+
+## Docker
+You can build and run Rabarbar to render websites in Docker.
+~~~
+docker build -t rabarbar .
+~~~
+Run
+~~~
+docker run -v ./:/out rabarbar --url http://openai.com --out /out/openai.png
 ~~~
 
 ## Notes

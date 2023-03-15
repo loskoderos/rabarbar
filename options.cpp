@@ -85,13 +85,13 @@ bool parseOptions(const QStringList &strings, Options &options)
     if (parser.isSet("width")) {
         options.width = parser.value("width").toInt();
     } else {
-        result = false;
+        options.width = 1024;
     }
 
     if (parser.isSet("height")) {
         options.height = parser.value("height").toInt();
     } else {
-        result = false;
+        options.height = 1024;
     }
 
     if (parser.isSet("delay")) {
