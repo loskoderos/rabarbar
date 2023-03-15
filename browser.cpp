@@ -17,7 +17,7 @@ Browser::Browser(const Options& options): QObject (), _options(options)
     _profile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
     _profile->setPersistentCookiesPolicy(QWebEngineProfile::NoPersistentCookies);
     _profile->setPersistentStoragePath(nullptr);
-    _profile->setRequestInterceptor(interceptor);
+    _profile->setUrlRequestInterceptor(interceptor);
     if (_options.userAgent.length() > 0) {
         _profile->setHttpUserAgent(_options.userAgent);
     }
@@ -44,10 +44,11 @@ Browser::~Browser()
 
 void Browser::run()
 {
-    qDebug() << "Start browser";
+    qDebug() << "Load website";
     _view->load(_options.url);
 
     // TODO: Investigate whether showing GUI can be avoided?
+    qDebug() << "Show browser";
     _view->show();
 
     QTimer::singleShot(_options.timeout * 1000, this, SLOT(timeout()));

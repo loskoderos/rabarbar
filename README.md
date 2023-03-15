@@ -26,16 +26,21 @@ referer         | no       | Custom referer.
 pdf-orientation | no       | PDF orientation (portrait, landscape).
 pdf-paper-size  | no       | PDF paper size (a3, a4, letter, tabloid).
 
+
+## Prerequisites
+This app has been built and tested with Qt6 on Ubuntu 22.
+~~~
+apt-get install qt6-base-dev qt6-webengine-dev libqt6webenginecore6-bin qmake6 xvfb
+~~~
+
 ## Building
-This app has been built and tested with Qt 5.12 running on Ubuntu 18.04 x64.
 ~~~
 git clone https://github.com/cepa/rabarbar
 cd rabarbar
-/opt/qt5/5.12.4/gcc_64/bin/qmake
+qmake6
 make
-./rabarbar
+./rabarbar --url https://openai.com/ --width 512 --height 512 --out sample.png
 ~~~
-Exact commands depend on your local Qt5 installation details.
 
 ## Headless
 Rabarbar works in headless mode with Xvfb.
@@ -45,3 +50,4 @@ xvfb-run -a ./rabarbar --url https://google.com --width 1280 --height 1024 --out
 
 ## Notes
 - Referer header can be ignored by Chromium due to internal policies, consider this feature experimental.
+- Code may be built with Qt5 however there were some issues reported with QWebEngine on Ubuntu.
